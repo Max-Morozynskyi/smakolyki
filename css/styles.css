@@ -1,0 +1,8 @@
+/* 
+font-family: 'Caveat', cursive 400;
+font-family: 'Marck Script', cursive 400, 700;
+*/
+:root {
+  --font-text: "Caveat", cursive;
+  --font-title: "Marck Script", cursive;
+}
