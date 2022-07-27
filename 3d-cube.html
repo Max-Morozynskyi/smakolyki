@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>3D cube</title>
+    <style>
+      :root {
+        --side: 200px;
+        --half-side: calc(var(--side) / 2);
+        --color-top: #090909;
+        --color-bottom: rgb(5, 239, 208);
+      }
+      body {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .title {
+        position: relative;
+        top: 80px;
+        display: block;
+        transform: translateY(100%);
+
+        text-transform: uppercase;
+        font-size: 30px;
+        text-shadow: 0 0 30px var(--color-bottom);
+        color: var(--color-bottom);
+        animation: vibrate 0.3s linear infinite both;
+      }
+
+      .work-area {
+        display: flex;
+        width: 50%;
+        height: 50%;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--color-top);
+      }
+
+      .work-area:hover .side {
+        transform: rotateY(calc(90deg * var(--i)))
+          translateZ(calc(var(--half-side) * 2));
+      }
+      .work-area:hover .top {
+        transform: translateY(calc(-2 * var(--half-side))) rotateX(90deg);
+      }
+
+      .cube {
+        position: relative;
+        width: var(--side);
+        height: var(--side);
+        transform-style: preserve-3d;
+        transform: rotateX(-30deg);
+        animation: animate 4s linear infinite;
+      }
+
+      @keyframes animate {
+        from {
+          transform: rotateX(-30deg) rotateY(0deg);
+        }
+        to {
+          transform: rotateX(-30deg) rotateY(-360deg);
+        }
+      }
+
+      @keyframes vibrate {
+        0% {
+          -webkit-transform: translate(0);
+          transform: translate(0);
+        }
+        20% {
+          -webkit-transform: translate(-2px, 2px);
+          transform: translate(-2px, 2px);
+        }
+        40% {
+          -webkit-transform: translate(-2px, -2px);
+          transform: translate(-2px, -2px);
+        }
+        60% {
+          -webkit-transform: translate(2px, 2px);
+          transform: translate(2px, 2px);
+        }
+        80% {
+          -webkit-transform: translate(2px, -2px);
+          transform: translate(2px, -2px);
+        }
+        100% {
+          -webkit-transform: translate(0);
+          transform: translate(0);
+        }
+      }
+
+      .plate {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: red;
+        font-size: 25px;
+      }
+
+      .top {
+        transform: translateY(calc(-1 * var(--half-side))) rotateX(90deg);
+        background: #222;
+        transition: transform 3s linear;
+      }
+
+      .bottom {
+        transform: translateY(calc(1.5 * var(--half-side))) rotateX(90deg);
+        background: var(--color-bottom);
+        filter: blur(40px);
+        box-shadow: 0 0 60px rgba(5, 239, 208, 0.2);
+        box-shadow: 0 0 80px rgba(5, 239, 208, 0.4);
+        box-shadow: 0 0 100px rgba(5, 239, 208, 0.6);
+        box-shadow: 0 0 120px rgba(5, 239, 208, 0.8);
+      }
+
+      .side {
+        background: linear-gradient(var(--color-top), var(--color-bottom));
+        transform: rotateY(calc(90deg * var(--i))) translateZ(var(--half-side));
+        transition: transform 3s linear;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="home-btn" href="./index.html" aria-label="home button"></a>
+    <h2 class="title">hover me!</h2>
+    <section class="work-area">
+      <div class="cube">
+        <span class="top plate"></span>
+        <span class="bottom plate"></span>
+        <span style="--i: 0" class="side plate"></span>
+        <span style="--i: 1" class="side plate"></span>
+        <span style="--i: 2" class="side plate"></span>
+        <span style="--i: 3" class="side plate"></span>
+      </div>
+    </section>
+  </body>
+</html>
